@@ -1,11 +1,15 @@
 <template>
   <v-app>
+    <v-app-bar>
+      <NavBar />
+    </v-app-bar>
     <v-main>
-      <HelloWorld />
+      <RouterView />
     </v-main>
   </v-app>
 </template>
 
 <script setup lang="ts">
-  import HelloWorld from '@/components/HelloWorld.vue'
+import NavBar from "@/components/NavBar.vue";
+import { RouterView } from "vue-router";
 </script>
