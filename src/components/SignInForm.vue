@@ -1,14 +1,13 @@
 <script setup lang="ts">
-import { ref } from "vue";
+import { ref, watch } from "vue";
 import { useForm } from "vee-validate";
 import { toTypedSchema } from "@vee-validate/yup";
 import signInValidationScheme from "@/components/validatorSchema/SignInValidationScheme";
-import { defaultLogoSize } from "./constants/defaultConstants";
 import FormBaseComponent from "./FormBaseComponent.vue";
 
 const isOpen = ref(false);
 
-const { defineComponentBinds, handleSubmit } = useForm({
+const { defineComponentBinds, handleSubmit, resetForm } = useForm({
   initialValues: {
     email: "",
     password: "",
@@ -33,6 +32,10 @@ const onSubmit = handleSubmit((values) => {
 const handleClose = () => {
   isOpen.value = false;
 };
+
+watch(isOpen, () => {
+  resetForm();
+});
 </script>
 
 <template>
