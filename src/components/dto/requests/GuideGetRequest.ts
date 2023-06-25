@@ -1,6 +1,6 @@
 export interface IGuideGetRequest {
   descriptionLimit: number;
-  searchQuery: string;
+  searchQuery: string | null;
   page: number;
   pageSize: number;
 }
