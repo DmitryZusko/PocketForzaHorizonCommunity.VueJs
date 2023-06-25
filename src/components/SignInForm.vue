@@ -21,7 +21,7 @@ const vuetifyConfig = (state: any) => ({
   },
 });
 
-const email = defineComponentBinds("email", (state) => vuetifyConfig(state));
+const email = defineComponentBinds("email", vuetifyConfig);
 const password = defineComponentBinds("password", vuetifyConfig);
 
 const onSubmit = handleSubmit((values) => {
