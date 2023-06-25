@@ -1,5 +1,11 @@
 export interface IDesign {
-  thumbnail: string;
+  id: string;
   title: string;
-  description: string;
+  thumbnailUrl: string;
+  description: string | null;
+  forzaShareCode: string;
+  rating: number;
+  authorUsername: string;
+  carModel: string;
+  creationDate: string;
 }

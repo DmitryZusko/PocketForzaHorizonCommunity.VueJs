@@ -1,5 +1,5 @@
 const getBaseUrl = () => {
-  return process.env.BASE_URL;
+  return import.meta.env.VITE_SERVER_URL;
 };
 
 const envHandler = {
