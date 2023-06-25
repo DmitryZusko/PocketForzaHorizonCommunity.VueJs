@@ -1,0 +1,57 @@
+<script setup lang="ts">
+import { ref } from "vue";
+import { useForm } from "vee-validate";
+import { toTypedSchema } from "@vee-validate/yup";
+import signInValidationScheme from "@/components/validatorSchema/SignInValidationScheme";
+import { defaultLogoSize } from "./constants/defaultConstants";
+import FormBaseComponent from "./FormBaseComponent.vue";
+
+const isOpen = ref(false);
+
+const { defineComponentBinds, handleSubmit } = useForm({
+  initialValues: {
+    email: "",
+    password: "",
+  },
+  validationSchema: toTypedSchema(signInValidationScheme),
+});
+
+const vuetifyConfig = (state: any) => ({
+  props: {
+    "error-messages": state.errors,
+  },
+});
+
+const email = defineComponentBinds("email", (state) => vuetifyConfig(state));
+const password = defineComponentBinds("password", vuetifyConfig);
+
+const onSubmit = handleSubmit((values) => {
+  console.log(values);
+  isOpen.value = false;
+});
+
+const handleClose = () => {
+  isOpen.value = false;
+};
+</script>
+
+<template>
+  <v-dialog v-model="isOpen" width="auto">
+    <template v-slot:activator="{ props }">
+      <v-btn elevation="2" v-bind="props">Sign In</v-btn>
+    </template>
+
+    <FormBaseComponent form-title="Sing In">
+      <template #form-body>
+        <v-form @submit.prevent="onSubmit">
+          <v-text-field v-bind="email" label="Email" />
+          <v-text-field v-bind="password" type="password" label="Password" />
+          <v-btn color="primary" variant="flat" type="submit">Ok</v-btn>
+          <v-btn color="primary" variant="outlined" @click="handleClose">Cancel</v-btn>
+        </v-form>
+      </template>
+    </FormBaseComponent>
+  </v-dialog>
+</template>
+
+<style></style>
