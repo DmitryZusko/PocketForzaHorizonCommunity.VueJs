@@ -15,7 +15,5 @@ import type { App } from "vue";
 
 export function registerPlugins(app: App) {
   loadFonts();
-  console.log(process.env); // remove this after you've confirmed it is working
-
   app.use(vuetify).use(router).use(pinia);
 }
