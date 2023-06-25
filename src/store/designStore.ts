@@ -16,11 +16,15 @@ export const useDesignStore = defineStore("designStore", {
     getDesignsState: (state) => state,
   },
   actions: {
+    setPage(newValue: number) {
+      this.page = newValue;
+    },
     async loadDesigns(params: IDesignGetRequest) {
       try {
         this.isLoading = true;
         const result = await designService.loadDesigns(params);
-        this.entities = result.data.entities;
+        this.entities = [...this.entities, ...result.data.entities];
+        this.total = result.data.total;
       } catch (error) {
         alert(error);
       } finally {
