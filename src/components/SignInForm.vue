@@ -4,8 +4,10 @@ import { useForm } from "vee-validate";
 import { toTypedSchema } from "@vee-validate/yup";
 import signInValidationScheme from "@/components/validatorSchema/SignInValidationScheme";
 import FormBaseComponent from "./FormBaseComponent.vue";
+import { useAuthStore } from "@/store/authStore";
 
 const isOpen = ref(false);
+const authStore = useAuthStore();
 
 const { defineComponentBinds, handleSubmit, resetForm } = useForm({
   initialValues: {
@@ -25,7 +27,7 @@ const email = defineComponentBinds("email", vuetifyConfig);
 const password = defineComponentBinds("password", vuetifyConfig);
 
 const onSubmit = handleSubmit((values) => {
-  console.log(values);
+  authStore.signInAsync({ email: values.email, password: values.password });
   isOpen.value = false;
 });
 
