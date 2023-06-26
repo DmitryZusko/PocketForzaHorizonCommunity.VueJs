@@ -12,8 +12,8 @@ const designState = designStore.getDesignsState;
 
 const searchQuery = ref("");
 
-const loadDesigns = async () => {
-  await designStore.loadDesigns({
+const loadDesignsAsync = async () => {
+  await designStore.loadDesignsAsync({
     page: designState.page,
     pageSize: designState.pageSize,
     searchQuery: searchQuery.value || null,
@@ -30,13 +30,13 @@ const handleInfinitLoad = async ({
 }) => {
   if (designState.total < designState.pageSize * designState.page) return done("empty");
 
-  loadDesigns();
+  loadDesignsAsync();
 
   done("ok");
 };
 
 onMounted(async () => {
-  loadDesigns();
+  loadDesignsAsync();
 });
 
 onUnmounted(() => {
